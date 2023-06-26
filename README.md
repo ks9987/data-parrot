@@ -1,46 +1,38 @@
-# Hello World
+# これは何
+ChatGPT Slackbot
+
+# 利用技術
+Slack Platform
+https://api.slack.com/start/overview
+
+# Slack Platformについて
 
 This automation demonstrates sending a greeting to channel.
 
 **Guide Outline**:
 
-- [Setup](#setup)
-  - [Install the Slack CLI](#install-the-slack-cli)
-  - [Clone the Sample](#clone-the-sample)
-- [Create a Link Trigger](#create-a-link-trigger)
-- [Running Your Project Locally](#running-your-project-locally)
-- [Testing](#testing)
-- [Deploying Your App](#deploying-your-app)
+- [これは何](#これは何)
+- [利用技術](#利用技術)
+- [Slack Platformについて](#slack-platformについて)
+  - [Running Your Project Locally](#running-your-project-locally)
+  - [Creating Triggers](#creating-triggers)
+    - [Link Triggers](#link-triggers)
+    - [Manual Trigger Creation](#manual-trigger-creation)
+  - [Datastores](#datastores)
+  - [Testing](#testing)
+  - [Deploying Your App](#deploying-your-app)
   - [Viewing Activity Logs](#viewing-activity-logs)
-- [Project Structure](#project-structure)
-- [Resources](#resources)
+  - [Project Structure](#project-structure)
+    - [`.slack/`](#slack)
+    - [`datastores/`](#datastores-1)
+    - [`functions/`](#functions)
+    - [`triggers/`](#triggers)
+    - [`workflows/`](#workflows)
+    - [`manifest.ts`](#manifestts)
+    - [`slack.json`](#slackjson)
+  - [Resources](#resources)
 
 ---
-
-## Setup
-
-Before getting started, first make sure you have a development workspace where
-you have permission to install apps. **Please note that the features in this
-project require that the workspace be part of
-[a Slack paid plan](https://slack.com/pricing).**
-
-### Install the Slack CLI
-
-To use this sample, you need to install and configure the Slack CLI.
-Step-by-step instructions can be found in our
-[Quickstart Guide](https://api.slack.com/automation/quickstart).
-
-### Clone the Sample
-
-Start by cloning this repository:
-
-```zsh
-# Clone this project onto your machine
-$ slack create hello-world -t slack-samples/deno-hello-world
-
-# Change into the project directory
-$ cd hello-world
-```
 
 ## Running Your Project Locally
 
