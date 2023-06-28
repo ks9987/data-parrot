@@ -1,5 +1,6 @@
 import { Manifest } from "deno-slack-sdk/mod.ts";
 import GreetingWorkflow from "./workflows/greeting_workflow.ts";
+import ChatGPTWorkflow from "./workflows/chatgpt_workflow.ts";
 
 /**
  * The app manifest contains the app's configuration. This
@@ -8,10 +9,20 @@ import GreetingWorkflow from "./workflows/greeting_workflow.ts";
  */
 export default Manifest({
   name: "DataParrot",
-  description:
-    "A sample that demonstrates using a function, workflow and trigger to send a greeting",
+  description: "A parrot that is reliable data assistant.",
   icon: "assets/bunnyparrot.png",
-  workflows: [GreetingWorkflow],
-  outgoingDomains: [],
-  botScopes: ["commands", "chat:write", "chat:write.public"],
+  workflows: [
+    GreetingWorkflow,
+    ChatGPTWorkflow,
+  ],
+  outgoingDomains: [
+    "api.openai.com",
+  ],
+  botScopes: [
+    "commands",
+    "chat:write",
+    "chat:write.public",
+    "app_mentions:read",
+    "channels:read",
+  ],
 });

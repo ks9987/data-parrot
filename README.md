@@ -20,6 +20,7 @@ This automation demonstrates sending a greeting to channel.
     - [Manual Trigger Creation](#manual-trigger-creation)
   - [Datastores](#datastores)
   - [Testing](#testing)
+  - [環境変数の設定](#環境変数の設定)
   - [Deploying Your App](#deploying-your-app)
   - [Viewing Activity Logs](#viewing-activity-logs)
   - [Project Structure](#project-structure)
@@ -111,6 +112,19 @@ Run all tests with `deno test`:
 ```zsh
 $ deno test
 ```
+
+## 環境変数の設定
+- local
+  ```env
+  MY_ENV_VAR=xxx
+  ```
+- production
+  ```sh
+  # add env variable
+  slack env add MY_ENV_VAR "xxx"
+  # list them
+  slack env list
+  ```
 
 ## Deploying Your App
 
