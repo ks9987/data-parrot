@@ -1,22 +1,16 @@
 import { DefineFunction, Schema, SlackFunction } from "deno-slack-sdk/mod.ts";
 
-export const ChatGPTFunction = DefineFunction({
-  callback_id: "chatgpt_function",
-  title: "Ask ChatGPT",
-  description: "Ask questions to ChatGPT",
-  source_file: "functions/chatgpt_function.ts",
+export const GptFunction = DefineFunction({
+  callback_id: "gpt_function",
+  title: "Ask GPT",
+  description: "Ask questions to GPT",
+  source_file: "functions/gpt_function.ts",
   input_parameters: {
     properties: {
-      user_id: {
-        type: Schema.slack.types.user_id,
-        description: "user ID",
-      },
-      question: {
-        type: Schema.types.string,
-        description: "question to chatgpt",
-      },
+      user_id: { type: Schema.slack.types.user_id },
+      conversation: { type: Schema.types.string },
     },
-    required: ["question", "user_id"],
+    required: ["user_id", "conversation"],
   },
   output_parameters: {
     properties: {
@@ -30,11 +24,9 @@ export const ChatGPTFunction = DefineFunction({
 });
 
 export default SlackFunction(
-  ChatGPTFunction,
+  GptFunction,
   async ({ inputs, env }) => {
-    // omit user id expressions
-    const content = inputs.question.replaceAll(/\<\@.+?\>/g, " ");
-    const role = "user";
+    const conversation = JSON.parse(inputs.conversation);
 
     const res = await fetch(
       "https://api.openai.com/v1/chat/completions",
@@ -46,18 +38,18 @@ export default SlackFunction(
         },
         body: JSON.stringify({
           model: "gpt-3.5-turbo",
-          messages: [{ role, content }],
+          messages: conversation,
         }),
       },
     );
     if (res.status != 200) {
       const body = await res.text();
       return {
-        error: `Failed to call OpenAPI AI. status:${res.status} body:${body}`,
+        error: `Failed to call OpenAI API. status:${res.status} body:${body}`,
       };
     }
     const body = await res.json();
-    console.log("chatgpt api response", { role, content }, body);
+    console.log("openai api response", conversation.slice(-1)[0], body);
     if (body.choices && body.choices.length >= 0) {
       const answer = body.choices[0].message.content as string;
       return { outputs: { answer } };

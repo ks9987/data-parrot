@@ -1,6 +1,5 @@
 import { Manifest } from "deno-slack-sdk/mod.ts";
-import GreetingWorkflow from "./workflows/greeting_workflow.ts";
-import ChatGPTWorkflow from "./workflows/chatgpt_workflow.ts";
+import GptWorkflow from "./workflows/gpt_workflow.ts";
 
 /**
  * The app manifest contains the app's configuration. This
@@ -12,8 +11,7 @@ export default Manifest({
   description: "A parrot that is reliable data assistant.",
   icon: "assets/bunnyparrot.png",
   workflows: [
-    GreetingWorkflow,
-    ChatGPTWorkflow,
+    GptWorkflow,
   ],
   outgoingDomains: [
     "api.openai.com",
@@ -24,5 +22,9 @@ export default Manifest({
     "chat:write.public",
     "app_mentions:read",
     "channels:read",
+    "channels:history",
+    "groups:history",
+    "mpim:history",
+    "im:history",
   ],
 });
